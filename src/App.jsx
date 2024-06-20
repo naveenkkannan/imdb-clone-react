@@ -23,12 +23,12 @@ function App() {
 
   let handleRemoveFromWatchlist  = (movieObj)=>{
     let filteredWatchlist = watchlist.filter((movie)=>{
-      return movie.id != movieObj.id
+      return movie.id !== movieObj.id
     })
 
     
 
-    setWatchList = (filteredWatchlist)
+    setWatchList(filteredWatchlist)
     localStorage.setItem('moviesApp' , JSON.stringify(filteredWatchlist))
     console.log(filteredWatchlist)
   }

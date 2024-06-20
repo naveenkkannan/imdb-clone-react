@@ -88,7 +88,7 @@ function WatchList({ watchlist, setWatchList , handleRemoveFromWatchlist}) {
         />
       </div>
       <div className="overflow-hidden rounded-lg border border-gray-200 m-8 ">
-        <table className="w-full text-gray-500 text-center bg-black">
+        <table className="w-full text-gray-500 text-center ">
           <thead className="border-b-2">
             <tr>
               <th>Name</th>

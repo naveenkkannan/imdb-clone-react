@@ -157,7 +157,6 @@
 // export default WatchList;
 
 // //{genreids[movieObj.genre_ids[0]]}
-
 import React, { useEffect, useState } from "react";
 import genreids from "../Utility/genre";
 
@@ -208,7 +207,6 @@ function WatchList({ watchlist, setWatchList, handleRemoveFromWatchlist }) {
     });
     temp = new Set(temp);
     setGenreList(["All Genres", ...temp]);
-    console.log(temp);
   }, [watchlist]);
 
   return (
@@ -294,10 +292,9 @@ function WatchList({ watchlist, setWatchList, handleRemoveFromWatchlist }) {
                       />
                       <div className="px-10">{movieObj.title}</div>
                     </td>
-                    {/* Remove the following td elements for rating and other details */}
-                    {/* <td>{movieObj.vote_average}</td>
-                    <td>{movieObj.popularity}</td>
-                    <td>{genreids[movieObj.genre_ids[0]]}</td> */}
+                    <td className="hidden md:table-cell">{movieObj.vote_average}</td>
+                    <td className="hidden md:table-cell">{movieObj.popularity}</td>
+                    <td className="hidden md:table-cell">{genreids[movieObj.genre_ids[0]]}</td>
                     <td
                       onClick={() => handleRemoveFromWatchlist(movieObj)}
                       className="text-red-800"
@@ -315,4 +312,3 @@ function WatchList({ watchlist, setWatchList, handleRemoveFromWatchlist }) {
 }
 
 export default WatchList;
-

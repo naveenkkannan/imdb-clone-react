@@ -157,6 +157,8 @@
 // export default WatchList;
 
 // //{genreids[movieObj.genre_ids[0]]}
+
+
 import React, { useEffect, useState } from "react";
 import genreids from "../Utility/genre";
 
@@ -217,7 +219,7 @@ function WatchList({ watchlist, setWatchList, handleRemoveFromWatchlist }) {
             <div
               onClick={() => handleFilter(genre)}
               className={
-                currGenre == genre
+                currGenre === genre
                   ? "bg-black flex justify-center items-center h-[2.5rem] w-[5rem] rounded-xl text-white font mx-4"
                   : "bg-gray-400/50 flex justify-center items-center h-[2.5rem] w-[5rem] rounded-xl text-black font mx-4 my-2"
               }
@@ -270,10 +272,10 @@ function WatchList({ watchlist, setWatchList, handleRemoveFromWatchlist }) {
           <tbody>
             {watchlist
               .filter((movieObj) => {
-                if (currGenre == "All Genres") {
+                if (currGenre === "All Genres") {
                   return true;
                 } else {
-                  return genreids[movieObj.genre_ids[0]] == currGenre;
+                  return genreids[movieObj.genre_ids[0]] === currGenre;
                 }
               })
               .filter((movieObj) => {
@@ -290,7 +292,7 @@ function WatchList({ watchlist, setWatchList, handleRemoveFromWatchlist }) {
                         src={`https://image.tmdb.org/t/p/original/${movieObj.backdrop_path}`}
                         alt={movieObj.title}
                       />
-                      <div className="px-10">{movieObj.title}</div>
+                      <div className="hidden md:block px-10">{movieObj.title}</div> {/* Name hidden on mobile */}
                     </td>
                     <td className="hidden md:table-cell">{movieObj.vote_average}</td>
                     <td className="hidden md:table-cell">{movieObj.popularity}</td>

@@ -27,18 +27,21 @@ import { Link } from "react-router-dom";
 
 function Navbar() {
   return (
-    <div className="flex space-x-8 border items-center pl-3 py-4"> {/* Adjusted space-x */}
+    <div className="flex justify-between items-center border px-4 py-4"> {/* Use justify-between */}
       <img className="w-[50px]" src={Logo} alt="Logo" />
 
-      <Link to="/" className="text-slate-950">
-        Movies
-      </Link>
+      <div className="flex space-x-8"> {/* Wrap links in a div with space-x */}
+        <Link to="/" className="text-slate-950">
+          Movies
+        </Link>
 
-      <Link to="/watchlist" className="text-slate-950">
-        Watchlist
-      </Link>
+        <Link to="/watchlist" className="text-slate-950">
+          Watchlist
+        </Link>
+      </div>
     </div>
   );
 }
 
 export default Navbar;
+

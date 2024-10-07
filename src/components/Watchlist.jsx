@@ -158,7 +158,6 @@
 
 // //{genreids[movieObj.genre_ids[0]]}
 
-
 import React, { useEffect, useState } from "react";
 import genreids from "../Utility/genre";
 
@@ -241,58 +240,80 @@ function WatchList({ watchlist, setWatchList, handleRemoveFromWatchlist }) {
         />
       </div>
 
-      <div className="m-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {watchlist
-            .filter((movieObj) => {
-              if (currGenre === "All Genres") {
-                return true;
-              } else {
-                return genreids[movieObj.genre_ids[0]] === currGenre;
-              }
-            })
-            .filter((movieObj) => {
-              return movieObj.title
-                .toLowerCase()
-                .includes(search.toLowerCase());
-            })
-            .map((movieObj) => {
-              return (
-                <div
-                  key={movieObj.id}
-                  className="border rounded-lg p-4 flex flex-col items-center"
-                >
-                  <img
-                    className="h-[12rem] w-[18rem] object-cover mb-4"
-                    src={`https://image.tmdb.org/t/p/original/${movieObj.backdrop_path}`}
-                    alt={movieObj.title}
-                  />
-                  {/* Name will be hidden on mobile */}
-                  <div className="hidden md:block text-lg font-bold mb-2">
-                    {movieObj.title}
+      <div className="overflow-hidden rounded-lg border border-gray-200 m-8 ">
+        <table className="w-full text-gray-500 text-center ">
+          <thead className="border-b-2">
+            <tr>
+              <th>Name</th>
+              <th className="hidden md:table-cell">
+                <div className="flex justify-center ">
+                  <div onClick={sortIncreasing} className="p-2">
+                    <i className="fa-solid fa-arrow-up"></i>
                   </div>
-
-                  {/* Ratings, Popularity, and Genre hidden on mobile */}
-                  <div className="hidden md:block">
-                    <p>Rating: {movieObj.vote_average}</p>
-                    <p>Popularity: {movieObj.popularity}</p>
-                    <p>Genre: {genreids[movieObj.genre_ids[0]]}</p>
+                  <div className="p-2">Ratings</div>
+                  <div onClick={sortDecreasing} className="p-2">
+                    <i className="fa-solid fa-arrow-down"></i>
                   </div>
-
-                  <button
-                    onClick={() => handleRemoveFromWatchlist(movieObj)}
-                    className="text-red-800 mt-4"
-                  >
-                    Remove from Watchlist
-                  </button>
                 </div>
-              );
-            })}
-        </div>
+              </th>
+              <th className="hidden md:table-cell">
+                <div className="flex justify-center ">
+                  <div onClick={sortPIncreasing} className="p-2 ">
+                    <i className="fa-solid fa-arrow-up  "></i>
+                  </div>
+                  <div className="p-2">Popularity</div>
+                  <div onClick={sortPDecreasing} className="p-2">
+                    <i className="fa-solid fa-arrow-down"></i>
+                  </div>
+                </div>
+              </th>
+              <th className="hidden md:table-cell">Genre</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {watchlist
+              .filter((movieObj) => {
+                if (currGenre === "All Genres") {
+                  return true;
+                } else {
+                  return genreids[movieObj.genre_ids[0]] === currGenre;
+                }
+              })
+              .filter((movieObj) => {
+                return movieObj.title
+                  .toLowerCase()
+                  .includes(search.toLowerCase());
+              })
+              .map((movieObj) => {
+                return (
+                  <tr className="border-b-2" key={movieObj.id}>
+                    <td className="flex items-center px-6 py-4">
+                      <img
+                        className="h-[6rem] w-[10rem] object-cover"
+                        src={`https://image.tmdb.org/t/p/original/${movieObj.backdrop_path}`}
+                        alt={movieObj.title}
+                      />
+                      {/* Name will be hidden on mobile */}
+                      <div className="hidden md:block px-10">{movieObj.title}</div>
+                    </td>
+                    {/* Ratings will be hidden on mobile */}
+                    <td className="hidden md:table-cell">{movieObj.vote_average}</td>
+                    {/* Popularity will be hidden on mobile */}
+                    <td className="hidden md:table-cell">{movieObj.popularity}</td>
+                    {/* Genre will be hidden on mobile */}
+                    <td className="hidden md:table-cell">{genreids[movieObj.genre_ids[0]]}</td>
+                    <td onClick={() => handleRemoveFromWatchlist(movieObj)} className="text-red-800">
+                      Delete
+                    </td>
+                  </tr>
+                );
+              })}
+          </tbody>
+        </table>
       </div>
     </>
   );
 }
 
 export default WatchList;
-
